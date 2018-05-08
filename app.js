@@ -44,4 +44,16 @@ io.on('connection',(socket)=>{
       username: socket.username
     });
   });
+
+  socket.on('typing', data=>{
+    socket.broadcast.emit('typing', {
+      username: socket.username
+    });
+  });
+
+  socket.on('notTyping', data=>{
+    socket.broadcast.emit('notTyping', {
+      
+    });
+  });
 });
