@@ -8,8 +8,10 @@ module.exports = (app,passport) =>{
     passport.authenticate('local-signup', function(err, user, info) {
       if (err) { return res.json(err); }
       if (!user) { return res.json('User already has email'); }
-      console.log(res.body);
-      res.json(user);
+      req.login(user, function(err2) {
+        if (err2) { return next(err); }
+        return res.json(user);
+      });
     })(req, res, next);
   });
 
@@ -35,6 +37,11 @@ module.exports = (app,passport) =>{
     // res.redirect('/users/' + req.user.username);
     res.json(req.session);
   });
+
+  app.get('/api/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
 
 };
 //Handy function to check if a user is logged in
