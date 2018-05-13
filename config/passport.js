@@ -113,6 +113,17 @@ module.exports = function(passport) {
 
             // all is well, return successful user
             // console.log("user",user);
+            user.local.session = user.generateSessionToken();
+
+            // save the user
+            user.save(function(err2) {
+                console.log(err2);
+                if (err2)
+                    throw err2;
+                return done(null, user);
+            });
+
+            console.log(user);
             return done(null, user);
         });
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const UserController = require('../controllers/users_controller');
 const User = mongoose.model('users');
+const jwt = require('jsonwebtoken');
 
 module.exports = (app,passport) =>{
 
@@ -25,7 +26,13 @@ module.exports = (app,passport) =>{
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
     // res.redirect('/users/' + req.user.username);
-    res.json(req.session);
+    req.session.user = req.user;
+    console.log("session",req.session.user);
+    res.json({
+      id: req.user._id,
+      email: req.user.local.email,
+      session: req.user.local.session
+    });
   });
 
   app.get('/api/logout', function(req, res){
