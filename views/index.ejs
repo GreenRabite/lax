@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
-    <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" >
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <meta charset="utf-8">
     <title>lax</title>
+    <% if (currentUser) { %>
+      <script>
+        window.currentUser = {
+          "id": "<%= currentUser._id %>",
+          "email": "<%= currentUser.local.email %>"
+        }
+      </script>
+    <% } %>
   </head>
-
   <body>
-    <header>
-      <h1>Chat</h1>
-    </header>
-
-    <section>
-      <div id="change_username">
-          <input id="username" type="text" />
-          <button id="send_username" type="button">Change username</button>
-      </div>
-    </section>
-
-    <section id="chatroom">
-      <section id="feedback"></section>
-    </section>
-
-
-      <section id="input_zone">
-        <input id="message" class="vertical-align" type="text" />
-        <button id="send_message" class="vertical-align" type="button">Send</button>
-      </section>
-
-    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
-    <script src="javascripts/chat.js"></script>
+    <div id="root"></div>
+    <script src="./javascripts/bundle.js" charset="utf-8"></script>
   </body>
 </html>

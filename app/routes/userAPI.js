@@ -19,16 +19,6 @@ module.exports = (app,passport) =>{
 		res.json(req.user);
 	});
 
-  // process the login form
-  // app.post('/api/session', function(req, res, next) {
-  //   passport.authenticate('local-login', function(err, user, info) {
-  //     if (err) { return res.json(err); }
-  //     if (!user) { return res.json('Wrong Username or Password'); }
-  //     console.log(req.session.passport);
-  //     res.json(user);
-  //   })(req, res, next);
-  // });
-
   app.post('/api/session',
   passport.authenticate('local-login'),
   function(req, res) {
